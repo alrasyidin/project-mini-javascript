@@ -16,8 +16,6 @@ add.addEventListener('click', function(){
     cell5  = row.insertCell(4);
     cell6  = row.insertCell(5);
 
-    cell5.innerHTML = "Wanita <input type='radio' name='jk'>\
-                        Pria <input type = 'radio' name ='jk'> ";
-
-    
+    cell5.innerHTML = "Pria <input type='radio' name='jk'>\
+                        Wanita <input type = 'radio' name ='jk'> ";
 })
