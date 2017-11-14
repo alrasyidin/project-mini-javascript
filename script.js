@@ -18,4 +18,33 @@ add.addEventListener('click', function(){
 
     cell5.innerHTML = "Pria <input type='radio' name='jk'>\
                         Wanita <input type = 'radio' name ='jk'> ";
+
+    var select1 = document.createElement('select'),
+        select2 = document.createElement('select'),
+        select3 = document.createElement('select');
+
+    for (var i = 1; i <= 31; i++) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select1.appendChild(opt);
+    }
+    
+    for (var i = 1; i <= 12; i++) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select2.appendChild(opt);
+    }
+
+    for (var i = 2000; i <= 2017; i++) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select3.appendChild(opt);
+    }
+
+    cell6.appendChild(select1);        
+    cell6.appendChild(select2);        
+    cell6.appendChild(select3);        
 })
