@@ -6,8 +6,8 @@ var add = document.getElementById('add'),
     index = 1,
     row, cell;
 
-function addRow(tabel, index){
-    return tabel.insertRow(index);
+function addRow(tabel){
+    return tabel.insertRow(-1);
 }
 
 
@@ -29,8 +29,7 @@ function dateBirth(start, finish, select){
 add.addEventListener('click', function(event){
     
     // menambahkan baris
-    var row = addRow(table, index);
-    console.log(row);
+    var row = addRow(table);
     
     generateColumn(row, 6);
     
@@ -74,10 +73,26 @@ function cek(cekAll, list){
 cekAll.addEventListener('click', function(){
     var list = document.querySelectorAll('.ceklist');
 
-    cek(this, list)    
+    cek(this, list);    
 });
 
+function removeRow(row) {
+    table.deleteRow(1);
+}
+
 remove.addEventListener('click', function(){
-    
+    var row = table.querySelectorAll('tr');
+    var check = table.querySelectorAll('td:first-child');
+
+    for (var i = 0; i < check.length; i++) {
+        if(check[i].firstElementChild.checked){
+            removeRow(row[i+1]);
+        }else{
+            alert("anda tidak dapat menghapus baris karena tidak ada yang terceklis");
+            break;
+        }
+    }
+
+    cekAll.checked = false;
 });
 
