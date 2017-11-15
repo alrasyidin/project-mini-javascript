@@ -1,50 +1,83 @@
 var add = document.getElementById('add'),
+    remove = document.getElementById('delete'),
+    cekAll = document.getElementById('cekall'),
     form = document.forms[0],
     table = document.getElementById('tabel'),
+    index = 1,
     row, cell;
 
+function addRow(tabel, index){
+    return tabel.insertRow(index);
+}
 
-add.addEventListener('click', function(){
-    var cell1, cell2, cell3, cell4, cell5, cell6,
 
-    row = table.insertRow(1);
+function generateColumn(row, count){
+    for (var i = 0; i < count; i++) {
+        row.insertCell(i);
+    }
+}
+
+function dateBirth(start, finish, select){
+    for (var i = start; i <= finish; i++) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select.appendChild(opt);
+    }
+}
+
+add.addEventListener('click', function(event){
     
-    cell1  = row.insertCell(0);
-    cell2  = row.insertCell(1);
-    cell3  = row.insertCell(2);
-    cell4  = row.insertCell(3);
-    cell5  = row.insertCell(4);
-    cell6  = row.insertCell(5);
-
-    cell5.innerHTML = "Pria <input type='radio' name='jk'>\
-                        Wanita <input type = 'radio' name ='jk'> ";
+    // menambahkan baris
+    var row = addRow(table, index);
+    console.log(row);
+    
+    generateColumn(row, 6);
+    
+    var cell = row.querySelectorAll('td');
+    index++;
 
     var select1 = document.createElement('select'),
         select2 = document.createElement('select'),
         select3 = document.createElement('select');
 
-    for (var i = 1; i <= 31; i++) {
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = i;
-        select1.appendChild(opt);
+    // tanggal
+    dateBirth(1, 31, select1);
+    // bulan
+    dateBirth(1, 12, select2);
+    // tahun
+    dateBirth(1950, new Date().getFullYear() , select3);
+
+    cell[5].appendChild(select1);        
+    cell[5].appendChild(select2);        
+    cell[5].appendChild(select3);        
+
+    var check = document.createElement('input');
+    check.type = "checkbox";
+    check.className = "ceklist";
+    cell[0].appendChild(check);
+});
+
+function cek(cekAll, list){
+    if (cekAll.checked) {
+        for (var i = 0; i < list.length; i++) {
+            list[i].checked = true;
+        }
+    } else {
+        for (var i = 0; i < list.length; i++) {
+            list[i].checked = false;
+        }
     }
+}
+
+
+cekAll.addEventListener('click', function(){
+    var list = document.querySelectorAll('.ceklist');
+
+    cek(this, list)    
+});
+
+remove.addEventListener('click', function(){
     
-    for (var i = 1; i <= 12; i++) {
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = i;
-        select2.appendChild(opt);
-    }
+});
 
-    for (var i = 2000; i <= 2017; i++) {
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = i;
-        select3.appendChild(opt);
-    }
-
-    cell6.appendChild(select1);        
-    cell6.appendChild(select2);        
-    cell6.appendChild(select3);        
-})
